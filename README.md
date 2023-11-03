@@ -10,7 +10,7 @@ Make sure docker compose is installed.
   
   cd /home/docker
   
-  git https://github.com/vahidirp/django-docker.git
+  git clone https://github.com/vahidirp/django-docker.git
   
 You should change "stack" and replace with your application or website name.
 
