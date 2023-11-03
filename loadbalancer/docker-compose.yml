@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  loadbalancer:
+    image: nginx:1.25-alpine
+    container_name: loadbalancer
+    hostname: loadbalancer
+    restart: always
+    tty: true
+    networks:
+      - static
+    ports:
+       - "80:80"
+       - "443:443"
+    volumes:
+      - ./sites-available/:/etc/nginx/conf.d/
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./snippets:/etc/nginx/snippets
+      - ./files/app:/var/www/stack
+      - ./files/certificates/stack:/etc/nginx/certs
+      - /tmp/nginx-log/:/var/log/nginx/
+      - /tmp/nginx-cache:/var/www/cache
+networks:
+    static:
+      external: true
