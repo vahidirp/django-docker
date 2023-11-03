@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+#Python Service
+  stack-python:
+    image: python:3.12-alpine
+    container_name: stack-python
+    hostname: stack-python
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./files/app:/usr/src/app/
+      - ./files/app:/var/www/stack
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+    depends_on:
+      - stack-postgresql
+    networks:
+      - static
+
+#Database-Server Service
+  stack-postgresql:
+    image: postgres:16-alpine
+    container_name: 'stack-postgresql'
+    hostname: 'stack-postgresql'
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+     POSTGRES_PASSWORD:
+     POSTGRES_USER:
+     POSTGRES_DB:
+
+    networks:
+      - static
+#Network configuration
+networks:
+  static:
+     external: true
