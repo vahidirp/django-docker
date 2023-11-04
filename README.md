@@ -30,4 +30,12 @@ docker compose up
 docker compose up -d
 ```
  
-Check your service up or down or restarting with : " docker ps " or " docker container ls "
+Check your service up or down or restarting with :
+```
+docker ps
+```
+or
+```
+docker container ls
+```
+
